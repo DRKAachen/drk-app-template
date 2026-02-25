@@ -1,14 +1,18 @@
-# Dependabot: open PRs when @drk/design-system has a new version.
-# See https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+# Dependabot: automated dependency updates for this design system repo.
+# Consuming apps: copy templates/dependabot.consuming-app.yml to your app as .github/dependabot.yml.
+
 version: 2
 updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
     open-pull-requests-limit: 5
-    # Group patch and minor updates for the design system so one PR updates it
-    groups:
-      design-system:
-        patterns:
-          - "@drk/*"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 3
