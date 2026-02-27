@@ -9,6 +9,10 @@ updates:
       interval: "weekly"
       day: "monday"
     open-pull-requests-limit: 5
+    allow:
+      - dependency-name: "@drkaachen/design-system-ui*"
+      - dependency-name: "@drkaachen/content-sanity*"
+      - dependency-name: "@drkaachen/next-site-runtime*"
 
   - package-ecosystem: "github-actions"
     directory: "/"

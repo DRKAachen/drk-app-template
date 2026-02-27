@@ -1,63 +1,26 @@
 import type { Metadata } from 'next'
-import { headers } from 'next/headers'
-import { notFound } from 'next/navigation'
-import { getSiteHostname, legalPageBySlugQuery, siteByHostnameQuery, client, LegalPage } from '@drk/design-system'
 
-export async function generateMetadata(): Promise<Metadata> {
-  const headersList = await headers()
-  const hostname = getSiteHostname(headersList)
-  const site = await client.fetch(siteByHostnameQuery, { hostname })
-
-  if (!site) {
-    return { title: 'Allgemeine Geschäftsbedingungen' }
-  }
-
-  const page = await client.fetch(legalPageBySlugQuery, {
-    siteId: site._id,
-    slug: 'agb',
-  })
-
-  return {
-    title: page?.title || 'Allgemeine Geschäftsbedingungen',
-    description: page?.metaDescription || 'Allgemeine Geschäftsbedingungen (AGB).',
-  }
+/**
+ * Metadata for terms and conditions page.
+ */
+export const metadata: Metadata = {
+  title: 'Allgemeine Geschaeftsbedingungen',
+  description: 'Allgemeine Geschaeftsbedingungen (AGB).',
 }
 
-export default async function AGBPage() {
-  const headersList = await headers()
-  const hostname = getSiteHostname(headersList)
-  const site = await client.fetch(siteByHostnameQuery, { hostname })
-
-  if (!site) {
-    notFound()
-  }
-
-  const page = await client.fetch(legalPageBySlugQuery, {
-    siteId: site._id,
-    slug: 'agb',
-  })
-
-  if (!page) {
-    return (
-      <div className="page">
-        <div className="container">
-          <h1 className="page__title">Allgemeine Geschäftsbedingungen</h1>
-          <div className="legal-content">
-            <p>
-              <strong>Hinweis:</strong> Die AGB werden über das CMS gepflegt.
-              Bitte erstellen Sie eine Legal Page mit dem Slug &quot;agb&quot; in Sanity Studio.
-            </p>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
+/**
+ * Baseline AGB page.
+ */
+export default function AGBPage() {
   return (
-    <LegalPage
-      title={page.title}
-      content={page.content}
-      lastUpdated={page.lastUpdated}
-    />
+    <div className="page">
+      <div className="container">
+        <h1 className="page__title">Allgemeine Geschaeftsbedingungen</h1>
+        <p>
+          Hinterlegen Sie hier Ihre projektspezifischen AGB. In der Baseline ist keine
+          automatische CMS-Ausspielung aktiviert.
+        </p>
+      </div>
+    </div>
   )
 }

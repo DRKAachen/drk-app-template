@@ -1,48 +1,70 @@
 import type { Metadata } from 'next'
-import { headers } from 'next/headers'
-import { getSiteByHostname, Header, Footer, CookieBanner } from '@drk/design-system'
-import '@drk/design-system/styles/globals.scss'
+import { Header, Footer, CookieBanner, type SiteConfig } from '@drkaachen/design-system-ui'
+import '@drkaachen/design-system-ui/styles/globals.scss'
 
 /**
- * Root layout - fetches site configuration and applies design system.
+ * Baseline UI-only site configuration.
+ * This keeps the template CMS-agnostic by default.
+ */
+const defaultSiteConfig: SiteConfig = {
+  _id: 'default-site',
+  name: 'Deutsches Rotes Kreuz',
+  hostname: process.env.NEXT_PUBLIC_DEFAULT_SITE_HOSTNAME || 'localhost',
+  defaultLocale: 'de',
+  logoUrl: process.env.NEXT_PUBLIC_SITE_LOGO_URL,
+  navigation: [
+    { label: 'Startseite', href: '/' },
+    {
+      label: 'Angebote',
+      href: '/#angebote',
+      children: [
+        { label: 'Blutspende', href: '/#angebote' },
+        { label: 'Erste Hilfe', href: '/#angebote' },
+        { label: 'Ehrenamt', href: '/#angebote' },
+      ],
+    },
+    { label: 'Kontakt', href: '/#kontakt' },
+  ],
+  footerLinks: [
+    { label: 'Kontakt', href: '/#kontakt' },
+    { label: 'Angebote', href: '/#angebote' },
+  ],
+}
+
+/**
+ * Root metadata generation for the baseline template.
  */
 export async function generateMetadata(): Promise<Metadata> {
-  const headersList = await headers()
-  const hostname = headersList.get('host') || ''
-  const site = await getSiteByHostname(hostname)
-
   return {
-    title: site?.name || 'Deutsches Rotes Kreuz',
-    description: site?.name
-      ? `${site.name} - Deutsches Rotes Kreuz`
-      : 'Deutsches Rotes Kreuz - Multi-site corporate platform',
+    title: defaultSiteConfig.name || 'Deutsches Rotes Kreuz',
+    description: defaultSiteConfig.name
+      ? `${defaultSiteConfig.name} - Deutsches Rotes Kreuz`
+      : 'Deutsches Rotes Kreuz - Site template',
   }
 }
 
-export default async function RootLayout({
+/**
+ * Root layout that renders design system primitives.
+ */
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const headersList = await headers()
-  const hostname = headersList.get('host') || ''
-  const site = await getSiteByHostname(hostname)
-
   return (
-    <html lang={site?.defaultLocale || 'de'}>
+    <html lang={defaultSiteConfig.defaultLocale || 'de'}>
       <body
         className="app"
-        data-site-id={site?._id || ''}
-        data-site-hostname={site?.hostname || ''}
+        data-site-hostname={process.env.NEXT_PUBLIC_DEFAULT_SITE_HOSTNAME || 'localhost'}
       >
         <a href="#main-content" className="skip-link">
           Zum Inhalt springen
         </a>
-        <Header site={site} />
+        <Header site={defaultSiteConfig} />
         <main id="main-content" className="main" tabIndex={-1}>
           {children}
         </main>
-        <Footer site={site} />
+        <Footer site={defaultSiteConfig} />
         <CookieBanner />
       </body>
     </html>
