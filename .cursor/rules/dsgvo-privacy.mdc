@@ -1,0 +1,36 @@
+---
+description: DSGVO/GDPR checks for data handling, storage, and third-party services
+alwaysApply: true
+---
+
+# DSGVO & GDPR Compliance
+
+Apply these checks whenever features touch personal data, storage, or external services.
+
+## External services
+
+- Confirm whether personal data (including IP) is transferred.
+- Verify AVV/DPA and transfer safeguards (for example SCC) where needed.
+- Ensure disclosure in Datenschutzerklaerung.
+
+## Storage and consent
+
+- Non-essential cookies/storage require prior consent (TTDSG 25).
+- Document cookie/storage name, purpose, category, and retention.
+- Gate non-essential behavior behind consent checks.
+
+## Assets and scripts
+
+- Self-host fonts and assets where feasible.
+- Do not embed third-party scripts without consent gating.
+- Prefer local bundling over external CDNs by default.
+
+## Data minimization
+
+- Collect only required data.
+- Define deletion/export strategy where applicable.
+- Do not log personal data without explicit justification.
+
+## Risk handling
+
+- If full compliance is disproportionately expensive, document risk and request explicit approval before implementation.

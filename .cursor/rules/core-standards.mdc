@@ -1,0 +1,39 @@
+---
+description: Core coding standards for this DRK Next.js template and derived apps
+alwaysApply: true
+---
+
+# Core Coding Standards
+
+Use these defaults for maintainability, security, and long-term stability.
+
+## Tech and architecture defaults
+
+- Next.js + React + TypeScript.
+- SCSS/Sass for styling (no Tailwind).
+- UI-only baseline via `@drkaachen/design-system-ui`.
+- CMS/runtime integration only when explicitly needed.
+
+## Dependencies
+
+- Prefer platform features and small focused utilities.
+- Add dependencies only when they are actively maintained and clearly justified.
+- Avoid hidden "magic" abstractions that reduce debuggability.
+
+## Code quality
+
+- Keep functions small and single-purpose.
+- Favor explicit, readable logic over clever abstractions.
+- Use descriptive names for symbols and files.
+- Keep comments in sync with behavior.
+
+## Security and privacy
+
+- Treat all external input as untrusted and validate it.
+- Never hardcode secrets or commit tokens.
+- Avoid logging personal data unless justified and documented.
+
+## Testing and docs
+
+- Update or add tests for behavior changes.
+- Update docs when APIs, env vars, architecture, or security posture changes.

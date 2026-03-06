@@ -1,0 +1,20 @@
+---
+description: Versioning guidance for template maintenance and generated apps
+globs: package.json
+alwaysApply: false
+---
+
+# Versioning Before Release
+
+When template behavior changes in a release, update project versioning deliberately.
+
+## Rules
+
+- Use semantic versioning for template releases.
+- Update `CHANGELOG.md` when user-facing behavior changes.
+- Do not bundle unrelated changes in the same release/version bump.
+
+## For apps created from this template
+
+- Carry versioning policy into the app repo.
+- If the app is deployed/published, keep changelog and version in sync with releases.

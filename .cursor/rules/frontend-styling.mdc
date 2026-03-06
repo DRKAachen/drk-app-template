@@ -1,0 +1,27 @@
+---
+description: SCSS/Sass styling conventions for template and consuming apps
+globs: **/*.scss
+alwaysApply: false
+---
+
+# Frontend Styling (SCSS/Sass)
+
+Styling is SCSS/Sass based. Do not introduce Tailwind.
+
+## Structure
+
+- Co-locate component styles (`Component.module.scss`) with components.
+- Keep shared tokens and mixins in dedicated partials.
+- Prefer CSS Modules for component isolation.
+
+## Naming and selectors
+
+- Prefer class-based selectors.
+- Use clear BEM-like naming where it improves clarity.
+- Keep nesting shallow (ideally <= 3 levels).
+
+## Reuse and responsiveness
+
+- Reuse variables and mixins over hard-coded values.
+- Keep breakpoints centralized in variables/mixins.
+- Avoid inline styles for layout except when truly necessary.

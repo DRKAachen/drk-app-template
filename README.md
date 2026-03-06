@@ -33,6 +33,25 @@ The default template is intentionally CMS-agnostic and only uses:
 
 - `npm run dev` – Start Next.js dev server
 - `npm run build` / `npm run start` – Build and run production
+- `npm run check:ai-rules` – Enforce cross-agent policy guardrails (DSGVO/font/Tailwind/secret checks)
+- `npm run sync:cursor-rules -- <target-app-path>` – Copy this template's AI guidance (`AI_RULES.md`, `AGENTS.md`, `CLAUDE.md`, `.cursor/rules`) into another app repo
+
+## Cross-agent rules
+
+This template keeps a cross-tool AI policy setup:
+
+- `AI_RULES.md` (canonical, tool-agnostic source of truth)
+- `AGENTS.md` (generic adapter)
+- `CLAUDE.md` (Claude Code adapter)
+- `.cursor/rules/` (Cursor-specific executable rules)
+
+Apps created from this template should keep all of these files so guidance survives across coding agents.
+
+If your scaffolding flow skips dotfiles, sync them explicitly:
+
+```bash
+npm run sync:cursor-rules -- ../my-generated-app
+```
 
 ## Optional: Sanity integration (not enabled by default)
 
@@ -77,6 +96,8 @@ Dependabot is configured to track:
 - `@drkaachen/content-sanity*`
 - `@drkaachen/next-site-runtime*`
 
-## Private registry setup
+## Package registry
 
-For `@drkaachen/*` packages, keep scope registry configuration in `.npmrc` and provide the auth token via environment variable (never hardcode secrets).
+The default setup consumes `@drkaachen/*` via the configured npm registry flow for your environment.
+
+If your organization uses a private mirror, use a scoped `.npmrc` with env-var-based auth only (never hardcoded secrets).

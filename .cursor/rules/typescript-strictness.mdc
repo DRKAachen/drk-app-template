@@ -1,0 +1,29 @@
+---
+description: TypeScript strictness and type-safety conventions
+globs: **/*.{ts,tsx}
+alwaysApply: false
+---
+
+# TypeScript Strictness
+
+## Avoid `any`
+
+- Do not use `any`; prefer `unknown` plus narrowing or explicit interfaces.
+
+## Return types
+
+- Exported/public functions should use explicit return types.
+
+## Null safety
+
+- Avoid non-null assertions unless invariant is documented.
+- Prefer `?.` and `??` over unsafe casts.
+
+## Types vs interfaces
+
+- Prefer `interface` for extendable object shapes.
+- Prefer `type` for unions/intersections/mapped types.
+
+## Enums
+
+- Prefer `as const` object patterns over enums for better tree-shaking.

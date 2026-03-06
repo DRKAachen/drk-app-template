@@ -1,0 +1,29 @@
+---
+description: Ensure docs are updated before commit/push when behavior or APIs change
+alwaysApply: true
+---
+
+# Update Documentation Before Push
+
+Before commit/push, check whether docs need updates.
+
+## Primary files to check
+
+- `README.md`
+- `.env.example`
+- `CHANGELOG.md` (if present)
+- `SECURITY.md` (if present)
+
+## Triggers for docs updates
+
+- New or changed features/components/APIs.
+- New or changed environment variables.
+- Architecture changes (for example UI-only vs optional CMS runtime).
+- Security/privacy changes (headers, consent, cookies, external services).
+- Dependency changes that affect setup or behavior.
+
+## Usually no docs update needed
+
+- Pure refactors without behavior/API changes.
+- Test-only changes.
+- Formatting-only changes.

@@ -1,0 +1,20 @@
+---
+description: Ensure Cursor rules propagate to apps created from this template
+alwaysApply: true
+---
+
+# Template Rule Propagation
+
+This repository is a template. Keep agent rules reusable for downstream apps.
+
+## Requirements
+
+- Keep authoritative rules in `.cursor/rules/`.
+- When rules change, update README guidance and sync utilities if needed.
+- For apps generated from this template, ensure `.cursor/rules/` exists in the new repo.
+
+## Operational fallback
+
+If scaffold tooling skips dotfiles, copy rules manually or run:
+
+`npm run sync:cursor-rules -- <target-app-path>`

@@ -9,7 +9,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "check:ai-rules": "node scripts/check-ai-rules.mjs",
+    "sync:cursor-rules": "node scripts/sync-cursor-rules.mjs"
   },
   "dependencies": {
     "@drkaachen/design-system-ui": "latest",
@@ -22,9 +24,12 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/sanitize-html": "^2.16.0",
-    "eslint": "^10.0.2",
+    "eslint": "^9.15.0",
     "eslint-config-next": "16.1.6",
     "sass": "^1.77.0",
     "typescript": "^5.6.0"
+  },
+  "overrides": {
+    "immutable": "5.1.5"
   }
 }

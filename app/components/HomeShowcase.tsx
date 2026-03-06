@@ -43,6 +43,39 @@ const contactModeOptions = [
   { value: 'phone', label: 'Telefon' },
 ]
 
+const stackOverview = [
+  {
+    title: 'Next.js App Router + React + TypeScript',
+    reason:
+      'Robuste Basis fuer moderne, wartbare Webprojekte mit klarer Struktur und guter Developer Experience.',
+  },
+  {
+    title: '@drkaachen/design-system-ui',
+    reason:
+      'Wiederverwendbare DRK-UI-Komponenten, konsistentes Corporate Design und weniger Doppelentwicklung.',
+  },
+  {
+    title: 'SCSS/Sass statt Utility-Frameworks',
+    reason:
+      'Lesbare Stylestruktur, bessere langfristige Wartbarkeit und klare Trennung von Struktur und Gestaltung.',
+  },
+  {
+    title: 'CMS-agnostische Baseline',
+    reason:
+      'Kein Pflicht-CMS im Standard: geringere Komplexitaet, weniger Abhaengigkeiten, kleineres Risiko.',
+  },
+  {
+    title: 'Optionale Module fuer Sanity/Runtime',
+    reason:
+      'Erweiterbar nur bei Bedarf mit @drkaachen/content-sanity und @drkaachen/next-site-runtime.',
+  },
+  {
+    title: 'DSGVO/GDPR-orientierte Defaults',
+    reason:
+      'Lokale Fonts, Cookie-Consent-Utilities und bewusste Aktivierung nicht notwendiger Features.',
+  },
+]
+
 /**
  * Interactive homepage showcase using all reusable UI primitives from the design system.
  */
@@ -108,9 +141,39 @@ export default function HomeShowcase() {
             <Button variant="secondary" asChild>
               <Link href="#kontakt">Kontakt aufnehmen</Link>
             </Button>
+            <Button variant="outline" asChild>
+              <Link href="#stack">Technischer Aufbau</Link>
+            </Button>
             <Button variant="outline" onClick={() => setIsModalOpen(true)}>
               Einsatzbericht ansehen
             </Button>
+          </div>
+        </section>
+
+        <section id="stack" style={{ marginBottom: '2.5rem' }}>
+          <h2>Technologie-Stack und warum er so aufgebaut ist</h2>
+          <p>
+            Dieses Template ist bewusst als solide DRK-Standardbasis konzipiert: leichtgewichtig im
+            Start, klar erweiterbar bei Bedarf und mit Fokus auf Datenschutz, Sicherheit und
+            Wartbarkeit.
+          </p>
+          <div
+            style={{
+              display: 'grid',
+              gap: '1rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              marginTop: '1rem',
+            }}
+          >
+            {stackOverview.map((item) => (
+              <article
+                key={item.title}
+                style={{ border: '1px solid #ddd', borderRadius: 8, padding: '1rem' }}
+              >
+                <h3 style={{ marginTop: 0 }}>{item.title}</h3>
+                <p>{item.reason}</p>
+              </article>
+            ))}
           </div>
         </section>
 

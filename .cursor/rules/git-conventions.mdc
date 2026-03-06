@@ -1,0 +1,25 @@
+---
+description: Git commit and workflow conventions
+alwaysApply: true
+---
+
+# Git Conventions
+
+## Commit messages
+
+Use Conventional Commits format:
+
+`type: short description`
+
+Types:
+- `feat`, `fix`, `chore`, `refactor`, `docs`, `test`, `style`, `perf`, `ci`, `audit`
+
+Guidelines:
+- Keep summary concise and imperative.
+- Reference issues when relevant.
+- Prefer one logical change per commit.
+
+## Branching
+
+- Keep `main` stable and CI-green.
+- Prefer feature branches for larger or collaborative changes.
