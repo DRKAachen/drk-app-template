@@ -1,0 +1,37 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.hero {
+  padding-block: 3rem 2rem;
+
+  p {
+    max-width: 40rem;
+    color: $color-text-muted;
+  }
+}
+
+.karten {
+  display: grid;
+  gap: $space;
+  padding-bottom: 3rem;
+
+  @include ab($bp-md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.karte {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  padding: 1.25rem;
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  p {
+    margin: 0;
+    color: $color-text-muted;
+  }
+}

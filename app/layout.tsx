@@ -1,72 +1,48 @@
-import type { Metadata } from 'next'
-import { Header, Footer, CookieBanner, type SiteConfig } from '@drkaachen/design-system-ui'
-import '@drkaachen/design-system-ui/styles/globals.scss'
+import type { Metadata } from "next";
+import Link from "next/link";
+import "@/styles/globals.scss";
+import styles from "./layout.module.scss";
 
-/**
- * Baseline UI-only site configuration.
- * This keeps the template CMS-agnostic by default.
- */
-const defaultSiteConfig: SiteConfig = {
-  _id: 'default-site',
-  name: 'Deutsches Rotes Kreuz',
-  hostname: process.env.NEXT_PUBLIC_DEFAULT_SITE_HOSTNAME || 'localhost',
-  defaultLocale: 'de',
-  logoUrl: process.env.NEXT_PUBLIC_SITE_LOGO_URL,
-  navigation: [
-    { label: 'Startseite', href: '/' },
-    {
-      label: 'Angebote',
-      href: '/#angebote',
-      children: [
-        { label: 'Blutspende', href: '/#angebote' },
-        { label: 'Erste Hilfe', href: '/#angebote' },
-        { label: 'Ehrenamt', href: '/#angebote' },
-      ],
-    },
-    { label: 'Kontakt', href: '/#kontakt' },
-  ],
-  footerLinks: [
-    { label: 'Kontakt', href: '/#kontakt' },
-    { label: 'Angebote', href: '/#angebote' },
-  ],
-}
+// Name der App: in der Oberfläche, im Browser-Tab und im Footer.
+const APP_NAME = "Meine DRK-App";
 
-/**
- * Root metadata generation for the baseline template.
- */
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: defaultSiteConfig.name || 'Deutsches Rotes Kreuz',
-    description: defaultSiteConfig.name
-      ? `${defaultSiteConfig.name} - Deutsches Rotes Kreuz`
-      : 'Deutsches Rotes Kreuz - Site template',
-  }
-}
+export const metadata: Metadata = {
+  title: { default: APP_NAME, template: `%s · ${APP_NAME}` },
+  description: "Eine App des DRK Kreisverband Aachen e. V.",
+};
 
-/**
- * Root layout that renders design system primitives.
- */
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const mitLogin = (process.env.AUTH_MODE ?? "none") !== "none";
+
   return (
-    <html lang={defaultSiteConfig.defaultLocale || 'de'}>
-      <body
-        className="app"
-        data-site-hostname={process.env.NEXT_PUBLIC_DEFAULT_SITE_HOSTNAME || 'localhost'}
-      >
-        <a href="#main-content" className="skip-link">
+    <html lang="de">
+      <body>
+        <a href="#inhalt" className="skip-link">
           Zum Inhalt springen
         </a>
-        <Header site={defaultSiteConfig} />
-        <main id="main-content" className="main" tabIndex={-1}>
+        <header className={styles.header}>
+          <div className={`container ${styles.headerInner}`}>
+            <Link href="/" className={styles.brand}>
+              <strong>DRK</strong> {APP_NAME}
+            </Link>
+            <nav className={styles.nav} aria-label="Hauptnavigation">
+              <Link href="/">Start</Link>
+              <Link href="/beispiel">Beispiel</Link>
+              {mitLogin && <a href="/abmelden">Abmelden</a>}
+            </nav>
+          </div>
+        </header>
+        <main id="inhalt" className="container" tabIndex={-1}>
           {children}
         </main>
-        <Footer site={defaultSiteConfig} />
-        <CookieBanner />
+        <footer className={styles.footer}>
+          <div className={`container ${styles.footerInner}`}>
+            <span>© {new Date().getFullYear()} DRK Kreisverband Aachen e. V.</span>
+            <Link href="/impressum">Impressum</Link>
+            <Link href="/datenschutz">Datenschutz</Link>
+          </div>
+        </footer>
       </body>
     </html>
-  )
+  );
 }

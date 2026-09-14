@@ -1,103 +1,82 @@
-# DRK Site Template
+# DRK App Template
 
-Next.js template for DRK projects using the new DRK Design System architecture.
+Startpunkt für neue Apps beim DRK Kreisverband Aachen. Enthält alles, was eine App bei uns braucht, damit du dich um deine Idee kümmern kannst und nicht um Infrastruktur.
 
-## Baseline (Default): UI-only
+**Stack:** Next.js 16 · TypeScript · Postgres mit Prisma · SCSS · Docker auf Coolify · optionaler Login (Passwort oder DRK-SSO)
 
-The default template is intentionally CMS-agnostic and only uses:
+## Los geht's
 
-- `@drkaachen/design-system-ui`
-
-### Setup
-
-1. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-2. Copy `.env.example` to `.env.local` and adjust optional baseline values as needed.
-3. Start development:
-
-   ```bash
-   npm run dev
-   ```
-
-### Fonts and DSGVO/GDPR
-
-- `@drkaachen/design-system-ui` bundles Merriweather through `@fontsource/merriweather`.
-- No manual `public/fonts/*` copy step is required anymore.
-- Do not use external font CDNs by default.
-
-## Scripts
-
-- `npm run dev` – Start Next.js dev server
-- `npm run build` / `npm run start` – Build and run production
-- `npm run check:ai-rules` – Enforce cross-agent policy guardrails (DSGVO/font/Tailwind/secret checks)
-- `npm run sync:cursor-rules -- <target-app-path>` – Copy this template's AI guidance (`AI_RULES.md`, `AGENTS.md`, `CLAUDE.md`, `.cursor/rules`) into another app repo
-
-## Cross-agent rules
-
-This template keeps a cross-tool AI policy setup:
-
-- `AI_RULES.md` (canonical, tool-agnostic source of truth)
-- `AGENTS.md` (generic adapter)
-- `CLAUDE.md` (Claude Code adapter)
-- `.cursor/rules/` (Cursor-specific executable rules)
-
-Apps created from this template should keep all of these files so guidance survives across coding agents.
-
-If your scaffolding flow skips dotfiles, sync them explicitly:
+Voraussetzungen: [Node 22](https://nodejs.org), [Docker Desktop](https://www.docker.com/products/docker-desktop/), Git.
 
 ```bash
-npm run sync:cursor-rules -- ../my-generated-app
+# 1. Abhängigkeiten installieren
+npm install
+
+# 2. Umgebungsvariablen anlegen (Standardwerte passen für lokal)
+cp .env.example .env
+
+# 3. Lokale Datenbank starten
+docker compose up -d
+
+# 4. Datenbank-Tabellen anlegen
+npm run db:migrate
+
+# 5. App starten → http://localhost:3000
+npm run dev
 ```
 
-## Optional: Sanity integration (not enabled by default)
+Die Seite `/beispiel` zeigt Lesen, Anlegen und Löschen mit der Datenbank. Von dort aus kannst du deine eigene App bauen.
 
-Add Sanity only if your project requires CMS-backed content.
+## Leitfaden
 
-### 1) Install optional packages
+| Dokument | Inhalt |
+| --- | --- |
+| [docs/01-erste-app.md](docs/01-erste-app.md) | Von der Idee zur laufenden App in 30 Minuten |
+| [docs/02-coolify-deployment.md](docs/02-coolify-deployment.md) | Deployen auf Coolify, Schritt für Schritt |
+| [docs/03-login.md](docs/03-login.md) | Zugangsschutz: keiner, Basic Auth, Passwort oder DRK-SSO |
+| [docs/04-datenbank.md](docs/04-datenbank.md) | Datenmodell ändern, Migrationen, Prisma |
+| [docs/05-checkliste-produktiv.md](docs/05-checkliste-produktiv.md) | Was vor dem Produktivbetrieb erledigt sein muss |
+| [AGENTS.md](AGENTS.md) | Die Regeln. Für dich und für deinen KI-Assistenten. |
 
-```bash
-npm install @drkaachen/content-sanity @drkaachen/next-site-runtime
-npm install -D sanity @sanity/vision next-sanity
+## Befehle
+
+| Befehl | Was er tut |
+| --- | --- |
+| `npm run dev` | Entwicklungsserver mit Hot Reload |
+| `npm run build` / `npm start` | Produktions-Build und -Start (so läuft es im Container) |
+| `npm run check` | Regelprüfung: Tailwind, Font-CDNs, Secrets, Pflichtdateien |
+| `npm run lint` | ESLint |
+| `npm run db:migrate` | Neue Migration aus Schemaänderungen erzeugen und anwenden |
+| `npm run db:studio` | Prisma Studio: Datenbank im Browser ansehen und bearbeiten |
+
+## Aufbau
+
+```
+app/            Seiten und Routen (Next.js App Router)
+  beispiel/     Beispiel für Datenbankzugriff mit Server Actions
+  login/        Login-Seite für AUTH_MODE=password
+  api/health/   Health-Check für Docker und Coolify
+lib/            Gemeinsamer Code: Datenbank-Client, Auth, Formatierung
+prisma/         Datenmodell und Migrationen
+styles/         SCSS-Variablen, Mixins, globale Styles
+docs/           Leitfaden
+scripts/        Regelprüfung
+Dockerfile      Produktions-Image (wird von Coolify gebaut)
+docker-compose.yml  NUR lokale Postgres-Datenbank
 ```
 
-### 2) Optional middleware for multisite runtime
+## Steckbrief
 
-Create `middleware.ts`:
+Vor dem Produktivbetrieb ausfüllen. Wird für das Verarbeitungsverzeichnis gebraucht.
 
-```ts
-export { middleware, config } from '@drkaachen/next-site-runtime/middleware'
-```
-
-### 3) Optional site mapping
-
-Use `getSiteByHostname` from `@drkaachen/content-sanity` and map the CMS result to the UI `SiteConfig` shape from `@drkaachen/design-system-ui` before passing it to UI components.
-
-### 4) Optional env vars (only for Sanity-enabled projects)
-
-```env
-NEXT_PUBLIC_SANITY_PROJECT_ID=
-NEXT_PUBLIC_SANITY_DATASET=
-NEXT_PUBLIC_SANITY_API_VERSION=
-NEXT_PUBLIC_DEFAULT_SITE_HOSTNAME=
-ALLOWED_SITE_HOSTNAMES=
-```
-
-`ALLOWED_SITE_HOSTNAMES` is recommended for hardened production setups.
-
-## Dependency automation
-
-Dependabot is configured to track:
-
-- `@drkaachen/design-system-ui*`
-- `@drkaachen/content-sanity*`
-- `@drkaachen/next-site-runtime*`
-
-## Package registry
-
-The default setup consumes `@drkaachen/*` via the configured npm registry flow for your environment.
-
-If your organization uses a private mirror, use a scoped `.npmrc` with env-var-based auth only (never hardcoded secrets).
+| | |
+| --- | --- |
+| **Name der App** | |
+| **Zweck** | Was macht die App, für wen? |
+| **Verantwortliche Person** | Name, Bereich, E-Mail |
+| **Nutzerkreis** | Wer benutzt die App? Mitarbeitende, Ehrenamtliche, Öffentlichkeit? |
+| **Personenbezogene Daten** | Welche Kategorien? (z. B. Name, E-Mail, Adresse, Gesundheitsdaten) |
+| **Speicherdauer** | Wann werden Daten gelöscht? |
+| **Externe Dienste** | Welche Fremddienste sehen Daten? AVV vorhanden? |
+| **Login** | none / password / authentik |
+| **Status** | Prototyp / Produktiv seit … |

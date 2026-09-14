@@ -1,40 +1,32 @@
-# Dependencies
+# Abhängigkeiten
 node_modules/
-.pnp
-.pnp.js
 
 # Next.js
 .next/
 out/
+next-env.d.ts
+*.tsbuildinfo
 
-# Build
-/build
-
-# Testing
-/coverage
-
-# Environment (keep .env.example, ignore secrets)
+# Umgebungsvariablen: NIE committen (nur .env.example gehört ins Repo)
 .env
-.env*.local
+.env.*
+!.env.example
 
-# Sanity
-.sanity
+# Prisma
+prisma/*.db
 
-# OS & editor
+# Betriebssystem / Editor
 .DS_Store
 .idea/
+.vscode/
 *.swp
-*.swo
-*.pem
 
 # Logs
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# Vercel
-.vercel
+# Schlüssel und Zertifikate
+*.pem
+*.key
 
-# TypeScript
-next-env.d.ts
+# Lokale Claude-Code-Konfiguration
+.claude/

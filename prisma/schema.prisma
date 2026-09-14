@@ -1,0 +1,18 @@
+// Datenmodell der App. Änderungen hier → `npm run db:migrate` erzeugt eine Migration.
+// Doku: docs/04-datenbank.md
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Beispielmodell. Ersetze oder erweitere es für deine App.
+model Eintrag {
+  id        Int      @id @default(autoincrement())
+  titel     String
+  text      String?
+  erstellt  DateTime @default(now())
+}

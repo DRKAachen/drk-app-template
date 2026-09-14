@@ -1,35 +1,41 @@
 {
-  "name": "drk-site-template",
-  "version": "0.1.0",
+  "name": "drk-app-template",
+  "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
-    "check:ai-rules": "node scripts/check-ai-rules.mjs",
-    "sync:cursor-rules": "node scripts/sync-cursor-rules.mjs"
+    "lint": "eslint",
+    "check": "node scripts/check.mjs",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:studio": "prisma studio",
+    "db:generate": "prisma generate",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@drkaachen/design-system-ui": "1.2.1",
-    "next": "16.1.6",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
+    "next": "^16.2.9",
+    "next-auth": "5.0.0-beta.32",
+    "pg": "^8.21.0",
+    "prisma": "^7.8.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
-    "@types/node": "^25.3.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "@types/sanitize-html": "^2.16.0",
-    "eslint": "^9.15.0",
-    "eslint-config-next": "16.1.6",
-    "sass": "^1.77.0",
-    "typescript": "^5.6.0"
-  },
-  "overrides": {
-    "immutable": "5.1.5"
+    "@types/node": "^22",
+    "@types/pg": "^8.20.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "dotenv": "^17.4.2",
+    "eslint": "^9",
+    "eslint-config-next": "^16.2.9",
+    "sass": "^1.101.0",
+    "typescript": "^5"
   }
 }

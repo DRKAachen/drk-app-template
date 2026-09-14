@@ -1,0 +1,14 @@
+@use "variables" as *;
+
+// Media-Query-Helfer: @include ab($bp-md) { ... }
+@mixin ab($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+// Sichtbarer Fokus-Ring für Tastaturnutzung (Barrierefreiheit).
+@mixin fokus {
+  outline: 3px solid $color-primary;
+  outline-offset: 2px;
+}
