@@ -1,6 +1,4 @@
-# Dependabot: automated dependency updates for this design system repo.
-# Consuming apps: copy templates/dependabot.consuming-app.yml to your app as .github/dependabot.yml.
-
+# Dependabot hält Abhängigkeiten aktuell und öffnet dafür Pull Requests.
 version: 2
 updates:
   - package-ecosystem: "npm"
@@ -9,14 +7,18 @@ updates:
       interval: "weekly"
       day: "monday"
     open-pull-requests-limit: 5
-    allow:
-      - dependency-name: "@drkaachen/design-system-ui*"
-      - dependency-name: "@drkaachen/content-sanity*"
-      - dependency-name: "@drkaachen/next-site-runtime*"
+    groups:
+      minor-und-patch:
+        update-types: ["minor", "patch"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
-    open-pull-requests-limit: 3
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"

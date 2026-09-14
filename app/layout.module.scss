@@ -1,0 +1,58 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.header {
+  background: $color-surface;
+  border-bottom: 4px solid $color-primary;
+}
+
+.headerInner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space;
+  padding-block: 0.75rem;
+}
+
+.brand {
+  font-weight: 700;
+  color: $color-text;
+  text-decoration: none;
+
+  strong {
+    color: $color-primary;
+  }
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space;
+
+  a {
+    color: $color-text;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
+
+.footer {
+  border-top: 1px solid $color-border;
+  color: $color-text-muted;
+  font-size: 0.9rem;
+
+  a {
+    color: inherit;
+  }
+}
+
+.footerInner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space;
+  padding-block: $space;
+}

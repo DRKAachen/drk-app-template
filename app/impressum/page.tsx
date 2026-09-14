@@ -1,26 +1,29 @@
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
-/**
- * Metadata for the legal notice page.
- */
-export const metadata: Metadata = {
-  title: 'Impressum',
-  description: 'Anbieterkennzeichnung gemaess gesetzlicher Vorgaben.',
-}
+export const metadata: Metadata = { title: "Impressum" };
 
-/**
- * Baseline legal notice page.
- */
+// Pflichtseite. Vor dem Produktivbetrieb mit den Angaben des Kreisverbands füllen
+// (siehe docs/05-checkliste-produktiv.md).
 export default function ImpressumPage() {
   return (
-    <div className="page">
-      <div className="container">
-        <h1 className="page__title">Impressum</h1>
-        <p>
-          Ergaenzen Sie hier die vollstaendige Anbieterkennzeichnung Ihres DRK-Standorts
-          gemaess den geltenden rechtlichen Anforderungen.
-        </p>
-      </div>
-    </div>
-  )
+    <section>
+      <h1>Impressum</h1>
+      <p>
+        <strong>DRK Kreisverband Aachen e. V.</strong>
+        <br />
+        Straße und Hausnummer
+        <br />
+        PLZ Aachen
+      </p>
+      <p>
+        Vertreten durch: …<br />
+        Registergericht und Registernummer: …<br />
+        Verantwortlich im Sinne des § 18 Abs. 2 MStV: …
+      </p>
+      <p>
+        Telefon: …<br />
+        E-Mail: …
+      </p>
+    </section>
+  );
 }
