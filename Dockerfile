@@ -2,7 +2,7 @@
 # Produktions-Image für Coolify: Next.js 16 + Prisma 7 + Postgres.
 # Coolify baut dieses Image automatisch bei jedem Push auf den Deploy-Branch.
 
-FROM node:22-slim AS base
+FROM node:26-slim AS base
 WORKDIR /app
 # openssl wird von Prisma benötigt.
 RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates \
