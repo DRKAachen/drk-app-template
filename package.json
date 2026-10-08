@@ -36,7 +36,7 @@
     "eslint": "^9",
     "eslint-config-next": "^16.4.0",
     "sass": "^1.101.0",
-    "typescript": "^5"
+    "typescript": "^7"
   },
   "overrides": {
     "mysql2": "^3.24.5"
