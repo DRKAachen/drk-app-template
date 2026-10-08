@@ -22,7 +22,7 @@
     "@prisma/client": "^7.8.0",
     "next": "^16.4.0",
     "next-auth": "5.0.0-beta.32",
-    "pg": "^8.21.0",
+    "pg": "^8.23.1",
     "prisma": "^7.8.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
@@ -35,7 +35,7 @@
     "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "^16.4.0",
-    "sass": "^1.101.0",
+    "sass": "^1.105.1",
     "typescript": "^5"
   },
   "overrides": {
