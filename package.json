@@ -18,14 +18,14 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "^7.8.0",
-    "@prisma/client": "^7.8.0",
-    "next": "^16.4.0",
+    "@prisma/adapter-pg": "^7.10.1",
+    "@prisma/client": "^7.10.1",
+    "next": "^16.4.2",
     "next-auth": "5.0.0-beta.32",
-    "pg": "^8.21.0",
-    "prisma": "^7.8.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "pg": "^8.23.1",
+    "prisma": "^7.10.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@types/node": "^22",
@@ -34,8 +34,8 @@
     "@types/react-dom": "^19",
     "dotenv": "^17.4.2",
     "eslint": "^9",
-    "eslint-config-next": "^16.4.0",
-    "sass": "^1.101.0",
+    "eslint-config-next": "^16.4.2",
+    "sass": "^1.105.2",
     "typescript": "^5"
   },
   "overrides": {
