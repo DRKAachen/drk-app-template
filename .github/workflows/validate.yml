@@ -7,6 +7,11 @@ on:
   push:
     branches: [main]
 
+# Der Workflow liest nur den Code. Ohne diese Zeile bekäme der GITHUB_TOKEN
+# die (je nach Org-Einstellung) weiten Standardrechte, inkl. Schreibzugriff.
+permissions:
+  contents: read
+
 jobs:
   quality:
     runs-on: ubuntu-latest
